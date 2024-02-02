@@ -1,6 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://f5benqfok7t6"]
+[gd_scene load_steps=13 format=3 uid="uid://f5benqfok7t6"]
 
 [ext_resource type="Script" path="res://scenes/ui/ability_upgrade_card.gd" id="1_n1hox"]
+[ext_resource type="PackedScene" uid="uid://b4bs4ydjru0ar" path="res://scenes/component/random_stream_player_component.tscn" id="2_s2fr4"]
+[ext_resource type="AudioStream" uid="uid://r4qu3lhoxccw" path="res://assets/audio/switch1.ogg" id="3_o3rs8"]
+[ext_resource type="AudioStream" uid="uid://b17dtjlu1lpej" path="res://assets/audio/switch2.ogg" id="4_1pn31"]
 
 [sub_resource type="Animation" id="Animation_ikwu0"]
 resource_name = "in"
@@ -98,6 +101,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, -0.174533, 0.0872665, 0.0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClickPlayerComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qc5sy"]
 resource_name = "discard"
@@ -152,6 +169,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.98, 0.98), Vector2(1.02, 1.02), Vector2(1, 1)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HoverPlayerComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_hpihr"]
 length = 0.001
@@ -192,6 +223,13 @@ offset_right = 120.0
 offset_bottom = 150.0
 pivot_offset = Vector2(75, 75)
 script = ExtResource("1_n1hox")
+
+[node name="HoverPlayerComponent" parent="." instance=ExtResource("2_s2fr4")]
+volume_db = -8.0
+streams = Array[AudioStream]([ExtResource("3_o3rs8"), ExtResource("4_1pn31")])
+
+[node name="ClickPlayerComponent" parent="." instance=ExtResource("2_s2fr4")]
+streams = Array[AudioStream]([ExtResource("3_o3rs8"), ExtResource("4_1pn31")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
